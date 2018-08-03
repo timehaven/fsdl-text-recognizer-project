@@ -1,9 +1,10 @@
+import sys
+import time
+
 from typing import Tuple
 
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
-
-import sys
 
 def mlp(input_shape: Tuple[int, ...],
         output_shape: Tuple[int, ...],
@@ -36,6 +37,7 @@ num_layers      {num_layers}
     
     if 0:
         print("Init:  stolen from sln manual for efficiency.")
+        time.sleep(3)
         model = Sequential()
         model.add(Flatten(input_shape=input_shape))
         for _ in range(num_layers):
@@ -44,11 +46,12 @@ num_layers      {num_layers}
         model.add(Dense(num_classes, activation='softmax'))
 
     elif 0:
+        print("Iteration 1:  simply add an extra layer.")
+        time.sleep(3)
         # Epoch 00007: early stopping
         # Training took 136.289008 s
         # GPU utilization: 38.75 +- 4.13
         # Test evaluation: 0.8264831546641679
-        print("Iteration 1:  simply add an extra layer.")
         model = Sequential()
         model.add(Flatten(input_shape=input_shape))
         for _ in range(num_layers + 1):
@@ -56,16 +59,31 @@ num_layers      {num_layers}
             model.add(Dropout(dropout_amount))
         model.add(Dense(num_classes, activation='softmax'))
     
-    elif 1:
+    elif 0:
+        print("Iteration 2:  same number of layers, just 1.5x wider.")
+        time.sleep(3)
         # Epoch 00006: early stopping
         # Training took 111.958745 s
         # GPU utilization: 37.14 +- 4.56
         # Test evaluation: 0.8363350326246743
-        print("Iteration 2:  same number of layers, just 1.5x wider.")
         model = Sequential()
         model.add(Flatten(input_shape=input_shape))
         for _ in range(num_layers):
             model.add(Dense(int(1.5 * layer_size), activation='relu'))
+            model.add(Dropout(dropout_amount))
+        model.add(Dense(num_classes, activation='softmax'))
+        
+    elif 1:
+        print("Iteration 3:  same number of layers, just 2x wider.")
+        # Epoch 00006: early stopping
+        # Training took 112.378707 s
+        # GPU utilization: 42.47 +- 5.85
+        # Test evaluation: 0.836481177411174
+        time.sleep(3)
+        model = Sequential()
+        model.add(Flatten(input_shape=input_shape))
+        for _ in range(num_layers):
+            model.add(Dense(int(2 * layer_size), activation='relu'))
             model.add(Dropout(dropout_amount))
         model.add(Dense(num_classes, activation='softmax'))
     
