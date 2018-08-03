@@ -3,6 +3,7 @@ from typing import Tuple
 from tensorflow.keras.models import Model, Sequential
 from tensorflow.keras.layers import Dense, Dropout, Flatten
 
+import sys
 
 def mlp(input_shape: Tuple[int, ...],
         output_shape: Tuple[int, ...],
@@ -14,10 +15,27 @@ def mlp(input_shape: Tuple[int, ...],
     Creates num_layers layers.
     """
     num_classes = output_shape[0]
-
+    
+    print(input_shape)
+    print(output_shape)
+    print(layer_size)
+    print(dropout_amount)
+    print(num_layers)
+    # [28, 28]
+    # (80,)
+    # 128
+    # 0.2
+    # 3
+    
     model = Sequential()
     # Don't forget to pass input_shape to the first layer of the model
     ##### Your code below (Lab 1)
+    model.add(Flatten(input_shape=input_shape))
+    for _ in range(num_layers):
+        model.add(Dense(layer_size, activation='relu'))
+        model.add(Dropout(dropout_amount))
+    model.add(Dense(num_classes, activation='softmax'))
+    ##### Your code above (Lab 1)
 
     ##### Your code above (Lab 1)
 
