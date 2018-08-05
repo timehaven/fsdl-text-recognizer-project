@@ -16,7 +16,7 @@ def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
     image_height, image_width = input_shape
     output_length, num_classes = output_shape
 
-    1/0
+    # 1/0
     
     num_windows = int((image_width - window_width) / window_stride) + 1
     if num_windows < output_length:
