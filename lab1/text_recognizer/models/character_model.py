@@ -19,7 +19,7 @@ class CharacterModel(Model):
     def predict_on_image(self, image: np.ndarray) -> Tuple[str, float]:
         if image.dtype == np.uint8:
             image = (image / 255).astype(np.float32)
-        # NOTE: integer to character mapping dictionary is self.data.mapping[integer]
+        # NOTE: integer to character mapping dictionary is self.data.mapping[integer]`
         ##### Your code below (Lab 1)
 
         # Cheating:  copy from sln

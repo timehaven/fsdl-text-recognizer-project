@@ -21,9 +21,9 @@ def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
         raise ValueError(f'Window width/stride need to generate at least {output_length} windows (currently {num_windows})')
 
     image_input = Input(shape=input_shape, name='image')
-    y_true = Input(shape=(output_length,), name='y_true')
+    y_true = Input(shape=(output_length,), name='y_true')  # padded to 34
     input_length = Input(shape=(1,), name='input_length')
-    label_length = Input(shape=(1,), name='label_length')
+    label_length = Input(shape=(1,), name='label_length')  # length of actual thing to predict, e.g. 7 for "the dog"
 
     gpu_present = len(device_lib.list_local_devices()) > 1
     lstm_fn = CuDNNLSTM if gpu_present else LSTM

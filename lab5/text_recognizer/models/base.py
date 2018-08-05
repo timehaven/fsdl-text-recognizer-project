@@ -31,7 +31,10 @@ class Model:
         self.batch_format_fn = None
 
     @property
-    def weights_filename(self):
+    def weights_filename(self, hack=False):
+        if hack:
+            return ('/home/timehaven/github.com/gradescope/fsdl-text-recognizer-project/' +
+                    'lab5/wandb/run-20180804_234736-uc49b8km/model-best.h5')
         DIRNAME.mkdir(parents=True, exist_ok=True)
         return str(DIRNAME / f'{self.name}_weights.h5')
 
@@ -65,8 +68,8 @@ class Model:
     def metrics(self):
         return ['accuracy']
 
-    def load_weights(self):
-        self.network.load_weights(self.weights_filename)
+    def load_weights(self, hack=False):
+        self.network.load_weights(self.weights_filename, hack)
 
     def save_weights(self):
         self.network.save_weights(self.weights_filename)

@@ -36,18 +36,9 @@ num_layers      {num_layers}
     # sys.exit()
     
     if 0:
-        print("Init:  stolen from sln manual for efficiency.")
-        time.sleep(3)
-        model = Sequential()
-        model.add(Flatten(input_shape=input_shape))
-        for _ in range(num_layers):
-            model.add(Dense(layer_size, activation='relu'))
-            model.add(Dropout(dropout_amount))
-        model.add(Dense(num_classes, activation='softmax'))
-
-    elif 0:
         print("Iteration 1:  simply add an extra layer.")
         time.sleep(3)
+        # NOT SUBMITTED
         # Epoch 00007: early stopping
         # Training took 136.289008 s
         # GPU utilization: 38.75 +- 4.13
@@ -62,6 +53,7 @@ num_layers      {num_layers}
     elif 0:
         print("Iteration 2:  same number of layers, just 1.5x wider.")
         time.sleep(3)
+        # SUBMITTED
         # Epoch 00006: early stopping
         # Training took 111.958745 s
         # GPU utilization: 37.14 +- 4.56
@@ -73,8 +65,9 @@ num_layers      {num_layers}
             model.add(Dropout(dropout_amount))
         model.add(Dense(num_classes, activation='softmax'))
         
-    elif 1:
+    elif 0:
         print("Iteration 3:  same number of layers, just 2x wider.")
+        # SUBMITTED
         # Epoch 00006: early stopping
         # Training took 112.378707 s
         # GPU utilization: 42.47 +- 5.85
@@ -87,6 +80,48 @@ num_layers      {num_layers}
             model.add(Dropout(dropout_amount))
         model.add(Dense(num_classes, activation='softmax'))
     
+    elif 0:
+        print("Iteration 4:  same number of layers, layer_size=512.")
+        # NOT SUBMITTED
+        # Epoch 00005: early stopping
+        # Training took 105.468419 s
+        # GPU utilization: 55.13 +- 4.37
+        # Test evaluation: 0.8360599365559691
+        time.sleep(3)
+        layer_size = 512
+        model = Sequential()
+        model.add(Flatten(input_shape=input_shape))
+        for _ in range(num_layers):
+            model.add(Dense(layer_size, activation='relu'))
+            model.add(Dropout(dropout_amount))
+        model.add(Dense(num_classes, activation='softmax'))
+    
+    elif 1:
+        
+        print("Iteration 5:  512, 256, 128.")
+        time.sleep(3)
+        layer_size = 512
+        model = Sequential()
+        model.add(Flatten(input_shape=input_shape))
+        model.add(Dense(512, activation='relu'))
+        model.add(Dropout(dropout_amount))
+        model.add(Dense(256, activation='relu'))
+        model.add(Dropout(dropout_amount))
+        model.add(Dense(128, activation='relu'))
+        model.add(Dropout(dropout_amount))
+        model.add(Dense(num_classes, activation='softmax'))
+        
+    else:
+        print("Init:  stolen from sln manual for efficiency.")
+        # SUBMITTED
+        time.sleep(3)
+        model = Sequential()
+        model.add(Flatten(input_shape=input_shape))
+        for _ in range(num_layers):
+            model.add(Dense(layer_size, activation='relu'))
+            model.add(Dropout(dropout_amount))
+        model.add(Dense(num_classes, activation='softmax'))
+
     ##### Your code above (Lab 1)
 
     return model

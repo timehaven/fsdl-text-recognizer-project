@@ -9,6 +9,8 @@ from text_recognizer.datasets.base import Dataset
 from text_recognizer.models.base import Model
 from training.gpu_util_sampler import GPUUtilizationSampler
 
+import wandb
+from wandb.keras import WandbCallback
 
 EARLY_STOPPING = True
 GPU_UTIL_SAMPLER = True
@@ -25,6 +27,8 @@ def train_model(model: Model, dataset: Dataset, epochs: int, batch_size: int, gp
         gpu_utilization = GPUUtilizationSampler(gpu_ind)
         callbacks.append(gpu_utilization)
 
+    if use_wandb:
+        callbacks.append(WandbCallback())
 
     model.network.summary()
 

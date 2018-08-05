@@ -35,6 +35,17 @@ def train_model(model: Model, dataset: Dataset, epochs: int, batch_size: int, gp
         callbacks.append(wandb)
     ##### Hide lines above until Lab 4
 
+    # Pick up after a good run.
+    new_fname = ('/home/timehaven/github.com/gradescope/fsdl-text-recognizer-project/' +
+                 'lab5/wandb/run-20180804_234736-uc49b8km/model-best.h5')
+    old_fname = model.weights_filename
+    model.weights_filename = new_fname
+    model.load_weights()
+    print("Loaded weights!")
+    model.weights_filename = old_fname
+    import time
+    time.sleep(5)
+
     model.network.summary()
 
     t = time()

@@ -54,9 +54,21 @@ def line_lstm_ctc(input_shape, output_shape, window_width=28, window_stride=14):
 
     if 1:
         lstm_output0 = lstm_fn(128, return_sequences=True)(convnet_outputs)
-        lstm_output = lstm_fn(128, return_sequences=True)(lstm_output0)
+        lstm_output1 = lstm_fn(128, return_sequences=True)(lstm_output0)
+        lstm_output = lstm_fn(128, return_sequences=True)(lstm_output1)
         # (num_windows, 128)        
     
+    elif 0:
+        
+        model = Sequential()
+        # model.add(Bidirectional(LSTM(10, return_sequences=True),
+        #                         input_shape=(5, 10)))
+        # model.add(Bidirectional(LSTM(10)))
+        # model.add(Dense(5))
+        # model.add(Activation('softmax'))
+        # model.compile(loss='categorical_crossentropy', optimizer='rmsprop')
+
+
     else:
         # Standard, submitted.
         lstm_output = lstm_fn(128, return_sequences=True)(convnet_outputs)

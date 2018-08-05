@@ -7,6 +7,8 @@ import os
 
 from training.util import train_model
 
+import wandb
+wandb.init()
 
 DEFAULT_TRAIN_ARGS = {
     'batch_size': 64,
